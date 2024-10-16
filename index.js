@@ -5,24 +5,10 @@ import cors from 'cors'
 const prisma = new PrismaClient()
 const app = express();
 
-app.use(
-    express.urlencoded({
-      extended:true
-    })
-  )
-
 //Cors
-app.use((req,res,next)=>{
-    res.header("Access-Control-Allow-Origin", "*")
-    res.header("Access-Control-Allow-Methods","GET,PUT,POST,DELETE")
-    res.header("Access-Control-Allow-Headers", "Content-Type")
-    res.header("Access-Control-Allow-Origin", "*");
-    app.use(cors({
-        origin: "*",
-        methods: ["GET","PUT","POST","DELETE"],
-    }))
-    next()
-});
+app.use(cors({
+    origin:"*"
+}))
 app.use(express.json());
 
 //criando a  rota get
