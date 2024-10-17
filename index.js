@@ -22,7 +22,7 @@ app.get('/', (req,res)=>{
     res.send("API rodando! :D")
 })
 
-app.get('/usuarios', async(req, res)=>{
+app.get('/api/usuarios', async(req, res)=>{
     let users = [];
     if (req.query){
         users = await prisma.user.findMany({
@@ -39,7 +39,7 @@ app.get('/usuarios', async(req, res)=>{
 })
 
 //criando a rota post
-app.post('/usuarios', async(req, res)=>{
+app.post('/api/usuarios', async(req, res)=>{
    await prisma.user.create({
         data:{
             email: req.body.email,
@@ -51,7 +51,7 @@ app.post('/usuarios', async(req, res)=>{
 })
 
 //Criando rota PUT
-app.put('/usuarios/:id', async(req, res)=>{
+app.put('/api/usuarios/:id', async(req, res)=>{
     await prisma.User.update({
         where:{
             id: req.params.id
@@ -66,7 +66,7 @@ app.put('/usuarios/:id', async(req, res)=>{
  })
 
  //Criando Rota DELETE
- app.delete('/usuarios/:id', async(req,res)=>{
+ app.delete('/api/usuarios/:id', async(req,res)=>{
     await prisma.user.delete({
         where: {
             id: req.params.id
@@ -75,7 +75,8 @@ app.put('/usuarios/:id', async(req, res)=>{
     res.status(200).json({message: "Usuário deletado com sucesso"});
  })
  
-app.listen(3000)
+const port = process.env.PORT || 3000;
+app.listen(port)
 
 /*
     Objetivos:
